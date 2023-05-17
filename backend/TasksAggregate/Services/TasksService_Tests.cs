@@ -43,4 +43,12 @@ public class TasksService_Tests
         var result = _taskService.GetAllTasks();
         _taskQueries.Verify(x => x.GetAllTasks(), Times.Once);
     }
+
+    [Fact]
+    public void CallingDeleteTaskCallsRepository()
+    {
+        _taskRepository.Setup(x => x.Remove(It.IsAny<int>()));
+        _taskService.DeleteTask(It.IsAny<int>());
+        _taskRepository.Verify(x => x.Remove(It.IsAny<int>()), Times.Once);
+    }
 }

@@ -67,4 +67,21 @@ public class TaskController_Tests
         var result = (BadRequestObjectResult)_taskController.GetAllTasks();
         Assert.Equal(StatusCodes.Status400BadRequest, result.StatusCode);
     }
+
+    [Fact]
+    public void CallingDeleteTask_OnSuccess_ReturnsOkObjectResult()
+    {
+        var result = (NoContentResult)_taskController.DeleteTask(It.IsAny<int>());
+        _taskService.Verify(x => x.DeleteTask(It.IsAny<int>()), Times.Once);
+        Assert.Equal(StatusCodes.Status204NoContent, result.StatusCode);
+    }
+
+    [Fact]
+    public void CallingDeleteTask_OnError_ReturnsBadRequestObjectResult()
+    {
+        _taskService.Setup(x => x.DeleteTask(It.IsAny<int>()))
+            .Throws<Exception>();
+        var result = (BadRequestObjectResult)_taskController.DeleteTask(It.IsAny<int>());
+        Assert.Equal(StatusCodes.Status400BadRequest, result.StatusCode);
+    }
 }

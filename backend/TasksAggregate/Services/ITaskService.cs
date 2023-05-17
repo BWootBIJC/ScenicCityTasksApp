@@ -6,4 +6,5 @@ public interface ITaskService
 {
     public int CreateTask(TaskEditViewModel taskEditViewModel);
     public IEnumerable<TaskListViewModel> GetAllTasks();
+    public void DeleteTask(int id);
 }

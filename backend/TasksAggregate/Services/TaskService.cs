@@ -26,4 +26,9 @@ public class TaskService : ITaskService
     {
         return _taskQueries.GetAllTasks();
     }
+
+    public void DeleteTask(int id)
+    {
+        _taskRepository.Remove(id);
+    }
 }

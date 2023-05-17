@@ -15,5 +15,14 @@ public class TaskRepository : ITaskRepository
         _dbContext.SaveChanges();
         return task.Id;
     }
-    
+
+    public void Remove(int id)
+    {
+        var taskToDelete = _dbContext.Task.Find(id);
+        if (taskToDelete != null)
+        {
+            _dbContext.Task.Remove(taskToDelete);
+            _dbContext.SaveChanges();
+        }
+    }
 }

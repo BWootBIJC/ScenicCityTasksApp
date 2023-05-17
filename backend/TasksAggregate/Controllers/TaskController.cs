@@ -43,4 +43,19 @@ public class TaskController : ControllerBase
             return new BadRequestObjectResult(e);
         }
     }
+
+    [HttpDelete]
+    [Route("{taskId}")]
+    public IActionResult DeleteTask(int taskId)
+    {
+        try
+        {
+            _taskService.DeleteTask(taskId);
+            return NoContent();
+        }
+        catch (Exception e)
+        {
+            return new BadRequestObjectResult(e);
+        }
+    }
 }
