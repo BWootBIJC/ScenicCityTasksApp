@@ -21,7 +21,7 @@ public class TaskController : ControllerBase
         try
         {
             var result = _taskService.CreateTask(taskEditViewModel);
-            return CreatedAtAction(nameof(GetAllTasks), new { id = result.Id }, result);
+            return CreatedAtAction(nameof(GetAllTasks), new { id = result }, result);
         }
         catch (Exception e)
         {

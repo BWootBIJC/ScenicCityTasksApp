@@ -4,5 +4,5 @@ namespace backend.TasksAggregate.Services;
 
 public interface ITaskService
 {
-    public TaskEditViewModel CreateTask(TaskEditViewModel taskEditViewModel);
+    public int CreateTask(TaskEditViewModel taskEditViewModel);
 }

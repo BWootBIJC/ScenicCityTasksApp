@@ -26,7 +26,7 @@ public class TaskController_Tests
     public void CallingCreateTaskReturns_OnSuccess_ReturnsCreatedAtActionResult()
     {
         _taskService.Setup(x => x.CreateTask(_taskEditViewModel))
-            .Returns(_taskEditViewModel);
+            .Returns(It.IsAny<int>());
         var result = (CreatedAtActionResult)_taskController.CreateTask(_taskEditViewModel);
         Assert.Equal(StatusCodes.Status201Created, result.StatusCode);
     }
@@ -35,7 +35,7 @@ public class TaskController_Tests
     public void CallingCreateTaskCallsService()
     {
         _taskService.Setup(x => x.CreateTask(_taskEditViewModel))
-            .Returns(_taskEditViewModel);
+            .Returns(It.IsAny<int>());
         var result = _taskController.CreateTask(_taskEditViewModel);
         _taskService.Verify(x => x.CreateTask(_taskEditViewModel), Times.Once);
     }

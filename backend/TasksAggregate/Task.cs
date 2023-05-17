@@ -1,4 +1,6 @@
-﻿namespace backend.TasksAggregate;
+﻿using backend.TasksAggregate.ViewModels;
+
+namespace backend.TasksAggregate;
 
 public class Task
 {
@@ -11,5 +13,12 @@ public class Task
         Id = id;
         Name = name;
         Description = description;
+    }
+
+    public Task(TaskEditViewModel taskEditViewModel)
+    {
+        Id = taskEditViewModel.Id;
+        Name = taskEditViewModel.Name;
+        Description = taskEditViewModel.Description;
     }
 }
