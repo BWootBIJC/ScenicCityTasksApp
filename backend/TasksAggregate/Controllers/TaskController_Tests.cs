@@ -4,6 +4,7 @@ using backend.TasksAggregate.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
+using Xunit.Sdk;
 
 namespace backend.TasksAggregate.Controllers;
 
@@ -46,6 +47,24 @@ public class TaskController_Tests
         _taskService.Setup(x => x.CreateTask(_taskEditViewModel))
             .Throws<Exception>();
         var result = (BadRequestObjectResult)_taskController.CreateTask(_taskEditViewModel);
+        Assert.Equal(StatusCodes.Status400BadRequest, result.StatusCode);
+    }
+
+    [Fact]
+    public void CallingGetAllTasks_OnSuccess_ReturnsOkObjectResult()
+    {
+        var result = (OkObjectResult)_taskController.GetAllTasks();
+        _taskService.Verify(x => x.GetAllTasks(), Times.Once);
+        Assert.Equal(StatusCodes.Status200OK, result.StatusCode);
+    }
+
+    [Fact]
+    public void CallingGetAllTasks_OnError_ReturnsBadRequestObjectResult()
+    {
+        _taskService.Setup(x => x.GetAllTasks())
+            .Throws<Exception>();
+
+        var result = (BadRequestObjectResult)_taskController.GetAllTasks();
         Assert.Equal(StatusCodes.Status400BadRequest, result.StatusCode);
     }
 }

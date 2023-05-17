@@ -1,6 +1,7 @@
 ﻿using backend.TasksAggregate.Services;
 using backend.TasksAggregate.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Exception = System.Exception;
 
 namespace backend.TasksAggregate.Controllers;
 
@@ -33,6 +34,13 @@ public class TaskController : ControllerBase
     [Route("list")]
     public IActionResult GetAllTasks()
     {
-        throw new NotImplementedException();
+        try
+        {
+            return new OkObjectResult(_taskService.GetAllTasks());
+        }
+        catch (Exception e)
+        {
+            return new BadRequestObjectResult(e);
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoFixture;
+using backend.TasksAggregate.Queries;
 using backend.TasksAggregate.Repos;
 using backend.TasksAggregate.ViewModels;
 using Moq;
@@ -10,14 +11,18 @@ public class TasksService_Tests
 {
     private readonly TaskService _taskService;
     private readonly Mock<ITaskRepository> _taskRepository;
+    private readonly Mock<ITaskQueries> _taskQueries;
     private readonly Fixture _fixture;
     private readonly TaskEditViewModel _taskEditViewModel;
+    private readonly IEnumerable<TaskListViewModel> _taskListViewModel;
 
     public TasksService_Tests()
     {
         _taskRepository = new Mock<ITaskRepository>();
-        _taskService = new TaskService(_taskRepository.Object);
+        _taskQueries = new Mock<ITaskQueries>();
+        _taskService = new TaskService(_taskRepository.Object, _taskQueries.Object);
         _fixture = new Fixture();
+        _taskListViewModel = _fixture.Create<IEnumerable<TaskListViewModel>>();
         _taskEditViewModel = _fixture.Create<TaskEditViewModel>();
     }
 
@@ -28,5 +33,14 @@ public class TasksService_Tests
             .Returns(It.IsAny<int>());
         var result = _taskService.CreateTask(_taskEditViewModel);
         _taskRepository.Verify(x => x.Add(It.IsAny<Task>()), Times.Once);
+    }
+
+    [Fact]
+    public void CallingGetAllTasksCallsQuery()
+    {
+        _taskQueries.Setup(x => x.GetAllTasks())
+            .Returns(_taskListViewModel);
+        var result = _taskService.GetAllTasks();
+        _taskQueries.Verify(x => x.GetAllTasks(), Times.Once);
     }
 }
