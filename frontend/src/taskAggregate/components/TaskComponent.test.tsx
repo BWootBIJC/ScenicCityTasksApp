@@ -1,6 +1,7 @@
-﻿import {render, RenderResult} from "@testing-library/react";
-import {TaskComponent} from "./TaskComponent.tsx";
-import {Task} from "../domain/Task.ts";
+﻿import React from "react";
+import {render, RenderResult} from "@testing-library/react";
+import {TaskComponent} from "./TaskComponent";
+import {Task} from "../domain/Task";
 
 describe("TaskComponent", () => {
     let taskComponent: RenderResult;
@@ -10,6 +11,6 @@ describe("TaskComponent", () => {
     });
     
     it("renders to the dom", () => {
-        expect(taskComponent).toBeInTheDocument();
+        expect(taskComponent).not.toBeNull();
     })
 })

@@ -1,4 +1,4 @@
-﻿import { Task } from "../domain/Task.ts";
+﻿import {Task} from "../domain/Task";
 
 interface ITaskProps {
     task: Task;
@@ -13,5 +13,5 @@ export const TaskComponent = ({task}: ITaskProps) => {
                 {task.title}
             </div>
         </>
-    ) 
+    )
 }
