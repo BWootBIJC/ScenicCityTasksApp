@@ -1,5 +1,6 @@
-﻿import {TaskItems} from "./TaskItems.ts";
-import {Task} from "./Task.ts";
+﻿import {TaskItems} from "./TaskItems";
+import {Task} from "./Task";
+
 
 describe("TaskItems", () => {
     let taskItems: TaskItems;
@@ -10,5 +11,14 @@ describe("TaskItems", () => {
             new Task(2, "title 2", "description 2"),
             new Task(3, "title 3", "description 3"),
         ]);
+    });
+    
+    it("On Calling add tasks, it adds a new task to the task items list", () => {
+        //Act
+        const result = taskItems.AddTask(new Task(4, "title 4", "description 4"));
+        
+        //Assert
+        expect(taskItems.tasks).toHaveLength(4);
+        expect(result).toBeInstanceOf(TaskItems);
     });
 });

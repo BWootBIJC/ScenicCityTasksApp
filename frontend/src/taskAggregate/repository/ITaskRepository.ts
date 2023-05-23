@@ -1,5 +1,5 @@
-﻿import {Task} from "../domain/Task.ts";
+﻿import {TaskItems} from "../domain/TaskItems";
 
 export interface ITaskRepository {
-    CreateTasks: () => Task[];
+    CreateTasks: () => Promise<TaskItems>;
 }

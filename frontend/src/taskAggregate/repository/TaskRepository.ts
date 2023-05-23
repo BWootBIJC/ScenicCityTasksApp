@@ -1,8 +1,9 @@
-﻿import {ITaskGateway} from "../gateway/ITaskGateway.ts";
-import {TaskItems} from "../domain/TaskItems.ts";
-import {Task} from "../domain/Task.ts";
+﻿import {ITaskRepository} from "./ITaskRepository";
+import {ITaskGateway} from "../gateway/ITaskGateway";
+import {Task} from "../domain/Task";
+import {TaskItems} from "../domain/TaskItems";
 
-export class TaskRepository {
+export class TaskRepository implements ITaskRepository {
     private readonly taskGateway: ITaskGateway;
     
     constructor(taskGateway: ITaskGateway) {

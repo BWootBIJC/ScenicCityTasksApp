@@ -1,4 +1,4 @@
-﻿import {Task} from "./Task.ts";
+﻿import {Task} from "./Task";
 
 export class TaskItems {
     tasks: Task[];
@@ -6,5 +6,8 @@ export class TaskItems {
         this.tasks = taskList;
     }
     
-    
+    public AddTask(task: Task): TaskItems {
+        this.tasks.push(task);
+        return new TaskItems(this.tasks);
+    }
 }

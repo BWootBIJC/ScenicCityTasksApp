@@ -1,7 +1,8 @@
-﻿import {TaskGateway} from "./TaskGateway.ts";
-import {IAPIGateway} from "../../apiGateway/IAPIGateway.ts";
+﻿
 import {It, Mock, Times} from "moq.ts";
-import {TaskListViewModel} from "../TaskListViewModel.ts";
+import {TaskListViewModel} from "../viewModels/TaskListViewModel";
+import {IAPIGateway} from "../../apiGateway/IAPIGateway";
+import {TaskGateway} from "./TaskGateway";
 
 describe("TaskGateway", () => {
     let taskGateway: TaskGateway;

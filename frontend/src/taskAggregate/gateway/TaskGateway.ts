@@ -1,6 +1,7 @@
-﻿import {ITaskGateway} from "./ITaskGateway.ts";
-import {IAPIGateway} from "../../apiGateway/IAPIGateway.ts";
-import {TaskListViewModel} from "../viewModels/TaskListViewModel.ts";
+﻿import {IAPIGateway} from "../../apiGateway/IAPIGateway";
+import {ITaskGateway} from "./ITaskGateway";
+import {TaskListViewModel} from "../viewModels/TaskListViewModel";
+
 
 export class TaskGateway implements ITaskGateway {
     private readonly _apiGateway: IAPIGateway;
