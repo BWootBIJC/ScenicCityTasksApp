@@ -10,9 +10,9 @@ export class TaskRepository implements ITaskRepository {
         this.taskGateway = taskGateway;        
     }
 
-    public async CreateTasks() {
+    public async GetAllTasks() {
         const result = await this.taskGateway.GetAllTasks();
-        const tasks: Task[] = result.map(x => new Task(x.id, x.title, x.description));
+        const tasks: Task[] = result.map(x => new Task(x.id, x.name, x.description));
         return new TaskItems(tasks);
     }
 }

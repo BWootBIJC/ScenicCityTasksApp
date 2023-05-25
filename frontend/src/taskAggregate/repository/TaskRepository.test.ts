@@ -28,7 +28,7 @@ describe("Task Repository", () => {
             .returns(Promise.resolve(taskListViewModel));
         
         //Act
-        taskRepository.CreateTasks();
+        taskRepository.GetAllTasks();
         
         //Assert
         taskGateway.verify(x => x.GetAllTasks(), Times.Once());
@@ -39,7 +39,7 @@ describe("Task Repository", () => {
             .returns(Promise.resolve(taskListViewModel));
         
         //Act
-        const result = await taskRepository.CreateTasks();
+        const result = await taskRepository.GetAllTasks();
         
         //Assert
         expect(result.tasks).toHaveLength(1);

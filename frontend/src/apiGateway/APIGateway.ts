@@ -1,5 +1,6 @@
-﻿import {IAPIGateway} from "./IAPIGateway.ts";
-import {IAPIResponseHandler} from "./IAPIResponseHandler.ts";
+﻿import {IAPIGateway} from "./IAPIGateway";
+import {IAPIResponseHandler} from "./IAPIResponseHandler";
+
 
 export class APIGateway implements IAPIGateway {
     private readonly apiResponseHandler: IAPIResponseHandler;
@@ -13,7 +14,7 @@ export class APIGateway implements IAPIGateway {
         };
         
         return fetch(path, requestOptions)
-            .then(this.apiResponseHandler.HandleResponse)
-            .then(data => data);
+            .then((response) => this.apiResponseHandler.HandleResponse(response))
+            .then(data => data as T);
     }
 }

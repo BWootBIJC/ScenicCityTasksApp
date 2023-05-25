@@ -1,11 +1,11 @@
 ﻿export class Task {
     id: number;
-    title: string;
+    name: string;
     description: string;
     
-    constructor(id: number, title: string, description: string) {
+    constructor(id: number, name: string, description: string) {
         this.id = id;
-        this.title = title;
+        this.name = name;
         this.description = description;
     }
 }

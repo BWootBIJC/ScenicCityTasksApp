@@ -1,4 +1,4 @@
-﻿import {IAPIResponseHandler} from "./IAPIResponseHandler.ts";
+﻿import {IAPIResponseHandler} from "./IAPIResponseHandler";
 
 export class APIResponseHandler implements IAPIResponseHandler {
     public async HandleResponse(response: any) {
@@ -6,6 +6,7 @@ export class APIResponseHandler implements IAPIResponseHandler {
             return await response.json()
                 .then((x: any) => Promise.reject(x));
         }
-        return response.json();
+        const result = await response.json();
+        return result;
     }
 }

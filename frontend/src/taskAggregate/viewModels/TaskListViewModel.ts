@@ -1,5 +1,5 @@
 ﻿export type TaskListViewModel = {
     id: number;
-    title: string;
+    name: string;
     description: string;
 }

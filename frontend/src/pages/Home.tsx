@@ -9,26 +9,32 @@ interface IHomePageProps {
 
 export const Home = ({repo}: IHomePageProps) => {
     const [tasks, setTasks] = useState<TaskItems | undefined>(undefined);
-    
+
     useEffect(() => {
-        repo.CreateTasks()
-            .then(x => setTasks(x))
-            .catch(e => alert(e.message));
+        repo.GetAllTasks()
+            .then(x => {
+                setTasks(x)
+            })
+            .catch(e => {
+                console.log(e)
+                alert(e.message)
+            });
     }, []);
-    
-    
-    if(!tasks) {
+
+
+    if (!tasks) {
         return (
             <>
                 <p>Tasks Loading...</p>
             </>
         )
     }
-    
+
     return (
         <>
-            
-            <TaskListComponent tasks={tasks}/>
+            <div className="max-w-7xl mx-auto mt-32">
+                <TaskListComponent tasks={tasks}/>
+            </div>
         </>
     )
 }
