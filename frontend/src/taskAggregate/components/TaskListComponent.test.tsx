@@ -1,6 +1,6 @@
 ﻿import {render, screen, RenderResult} from "@testing-library/react";
 import {TaskListComponent} from "./TaskListComponent";
-import {TaskItems} from "../domain/TaskItems";
+import {TaskItemsView} from "../domain/TaskItemsView";
 import {Task} from "../domain/Task";
 
 describe("Task List Component", () => {
@@ -8,7 +8,7 @@ describe("Task List Component", () => {
 
     beforeEach(() => {
         taskListComponent = render(
-            <TaskListComponent tasks={new TaskItems([
+            <TaskListComponent tasks={new TaskItemsView([
                 new Task(1, "title 1", "description 1"),
                 new Task(2, "title 2", "description 2")
             ])}

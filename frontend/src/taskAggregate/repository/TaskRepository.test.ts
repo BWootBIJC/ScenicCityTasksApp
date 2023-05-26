@@ -1,9 +1,9 @@
-﻿import {TaskRepository} from "./TaskRepository.ts";
-import {ITaskGateway} from "../gateway/ITaskGateway.ts";
+﻿import {TaskRepository} from "./TaskRepository";
+import {ITaskGateway} from "../gateway/ITaskGateway";
 import {Mock, Times} from "moq.ts";
-import {TaskListViewModel} from "../viewModels/TaskListViewModel.ts";
-import {Task} from "../domain/Task.ts";
-import {TaskItems} from "../domain/TaskItems.ts";
+import {TaskListViewModel} from "../viewModels/TaskListViewModel";
+import {Task} from "../domain/Task";
+import {TaskItemsView} from "../domain/TaskItemsView";
 
 describe("Task Repository", () => {
     let taskRepository: TaskRepository;
@@ -16,7 +16,7 @@ describe("Task Repository", () => {
         taskListViewModel = [
             {
                 id: 1,
-                title: "title",
+                name: "name",
                 description: "description"
             }
         ]
@@ -44,6 +44,6 @@ describe("Task Repository", () => {
         //Assert
         expect(result.tasks).toHaveLength(1);
         expect(result.tasks).toBeInstanceOf(Array<Task>);
-        expect(result).toBeInstanceOf(TaskItems);
+        expect(result).toBeInstanceOf(TaskItemsView);
     });
 });

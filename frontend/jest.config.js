@@ -1,6 +1,6 @@
 ﻿export default {
     transform: {
-        '^.+\\.[jt]sx?$': 'babel-jest',
+        '^.+\\.[jt]sx?$': 'ts-jest',
     },
     setupFilesAfterEnv: ['./jest.setup.js'],
     testEnvironment: 'jest-environment-jsdom',
@@ -8,6 +8,7 @@
     globals: {
         'ts-jest': {
             diagnostics: false,
+            isolatedModules: true
         },
     },
 };

@@ -20,4 +20,8 @@ describe("TaskComponent", () => {
         const taskDescriptionComponent = screen.getByTestId("taskDescription");
         expect(taskDescriptionComponent).toBeInTheDocument();
     });
+    it("Renders the button component", () => {
+        const button = screen.getByTestId("removeButton");
+        expect(button).toBeInTheDocument();
+    })
 });

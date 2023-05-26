@@ -1,8 +1,8 @@
-import {TaskItems} from "../domain/TaskItems";
+import {TaskItemsView} from "../domain/TaskItemsView";
 import {TaskComponent} from "./TaskComponent";
 
 interface ITaskListComponentProps {
-    tasks: TaskItems;
+    tasks: TaskItemsView;
 }
 
 export const TaskListComponent = ({tasks}: ITaskListComponentProps) => {

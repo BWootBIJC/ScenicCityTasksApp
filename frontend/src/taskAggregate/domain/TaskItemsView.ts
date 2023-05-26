@@ -1,13 +1,13 @@
 ﻿import {Task} from "./Task";
 
-export class TaskItems {
+export class TaskItemsView {
     tasks: Task[];
     constructor(taskList: Task[]) {
         this.tasks = taskList;
     }
     
-    public AddTask(task: Task): TaskItems {
+    public AddTask(task: Task): TaskItemsView {
         this.tasks.push(task);
-        return new TaskItems(this.tasks);
+        return new TaskItemsView(this.tasks);
     }
 }

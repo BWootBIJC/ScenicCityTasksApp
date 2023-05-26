@@ -1,5 +1,5 @@
-﻿import {TaskItems} from "../domain/TaskItems";
+﻿import {TaskItemsView} from "../domain/TaskItemsView";
 
 export interface ITaskRepository {
-    GetAllTasks: () => Promise<TaskItems>;
+    GetAllTasks: () => Promise<TaskItemsView>;
 }

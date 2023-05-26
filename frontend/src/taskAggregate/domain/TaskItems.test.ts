@@ -1,12 +1,12 @@
-﻿import {TaskItems} from "./TaskItems";
+﻿import {TaskItemsView} from "./TaskItemsView";
 import {Task} from "./Task";
 
 
 describe("TaskItems", () => {
-    let taskItems: TaskItems;
+    let taskItems: TaskItemsView;
     
     beforeEach(() => {
-        taskItems = new TaskItems([
+        taskItems = new TaskItemsView([
             new Task(1, "title 1", "description 1"),
             new Task(2, "title 2", "description 2"),
             new Task(3, "title 3", "description 3"),
@@ -19,6 +19,6 @@ describe("TaskItems", () => {
         
         //Assert
         expect(taskItems.tasks).toHaveLength(4);
-        expect(result).toBeInstanceOf(TaskItems);
+        expect(result).toBeInstanceOf(TaskItemsView);
     });
 });
