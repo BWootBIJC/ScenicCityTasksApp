@@ -3,14 +3,13 @@
 @import 'tailwindcss/utilities.css';
 
 @layer base {
+    html, body {
+        @apply bg-zinc-700;
+    }
     h1 {
         @apply font-bold text-3xl text-white;
     }
     p {
         @apply text-slate-300;
-    }
-    
-    button {
-        
     }
 }

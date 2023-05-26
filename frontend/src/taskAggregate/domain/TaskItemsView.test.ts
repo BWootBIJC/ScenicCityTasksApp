@@ -21,4 +21,13 @@ describe("TaskItems", () => {
         expect(taskItems.tasks).toHaveLength(4);
         expect(result).toBeInstanceOf(TaskItemsView);
     });
+    
+    it("On calling remove item, it removes the specified task from list", () => {
+        //Act
+        const result = taskItems.RemoveTask(taskItems.tasks[1]);
+        
+        //Assert
+        expect(result.tasks.length).toBe(2);
+        expect(result).toBeInstanceOf(TaskItemsView);
+    });
 });

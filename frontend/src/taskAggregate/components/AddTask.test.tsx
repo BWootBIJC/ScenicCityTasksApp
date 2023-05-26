@@ -18,7 +18,7 @@ describe("Add Task Component", () => {
         const h1 = screen.getByRole("h1");
         expect(h1).toBeInTheDocument();
         expect(h1.innerHTML).toBe("Add Task");
-    })
+    });
     it("Renders input component", () => {
         const input = screen.getByTestId("input");
         expect(input).toBeInTheDocument();

@@ -8,4 +8,14 @@
         this.name = name;
         this.description = description;
     }
+    
+    public SetName(name: string) {
+        this.name = name;
+        return new Task(this.id, this.name, this.description);
+    }
+    
+    public SetDescription(description: string) {
+        this.description = description;
+        return new Task(this.id, this.name, this.description);
+    }
 }
