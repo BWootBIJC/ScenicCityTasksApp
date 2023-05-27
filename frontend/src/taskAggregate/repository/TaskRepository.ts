@@ -12,7 +12,7 @@ export class TaskRepository implements ITaskRepository {
 
     public async GetAllTasks() {
         const result = await this.taskGateway.GetAllTasks();
-        const tasks: Task[] = result.map(x => new Task(x.id, x.name, x.description));
+        const tasks: Task[] = result.map(x => new Task(x.id, x.title, x.description));
         return new TaskItemsView(tasks);
     }
 }

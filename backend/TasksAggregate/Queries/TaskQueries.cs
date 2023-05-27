@@ -13,7 +13,7 @@ public class TaskQueries : ITaskQueries
     public IEnumerable<TaskListViewModel> GetAllTasks()
     {
         return _dbContext.Task
-            .OrderBy(x => x.Id)
-            .Select(x => new TaskListViewModel(x.Id, x.Name, x.Description));
+            .OrderBy(x => x.Title)
+            .Select(x => new TaskListViewModel(x.Id, x.Title, x.Description));
     }
 }

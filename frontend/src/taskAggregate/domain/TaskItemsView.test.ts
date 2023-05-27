@@ -18,8 +18,19 @@ describe("TaskItems", () => {
         const result = taskItems.AddTask(new Task(4, "title 4", "description 4"));
         
         //Assert
-        expect(taskItems.tasks).toHaveLength(4);
+        expect(result.tasks).toHaveLength(4);
         expect(result).toBeInstanceOf(TaskItemsView);
+    });
+    
+    it("If name has empty value, it throws an error", () => {
+        //Act & Assert
+        expect(() => taskItems.AddTask(new Task(4, "", "")))
+            .toThrowError("Please provide a name.");
+    });
+    
+    it("If task has no description, it throws an error", () => {
+       expect(() => taskItems.AddTask(new Task(4, "name", "")))
+           .toThrowError("Please provide a description."); 
     });
     
     it("On calling remove item, it removes the specified task from list", () => {

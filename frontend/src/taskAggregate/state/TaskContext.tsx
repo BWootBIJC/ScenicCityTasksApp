@@ -1,7 +1,6 @@
 ﻿import React, {createContext, Dispatch, ReactNode, SetStateAction, useEffect, useState} from "react";
 import {TaskItemsView} from "../domain/TaskItemsView";
 import {ITaskRepository} from "../repository/ITaskRepository";
-import {TaskRepository} from "../repository/TaskRepository";
 
 interface ITaskContext {
     tasks: TaskItemsView | undefined;
@@ -25,11 +24,11 @@ export const TaskContextProvider = ({ children, taskRepo }: ITaskContextProvider
     useEffect(() => {
         taskRepo.GetAllTasks()
             .then(x => {
-                setTasks(x)
+                setTasks(x);
             })
             .catch(e => {
-                console.log(e)
-                alert(e.message)
+                console.log(e);
+                alert(e.message);
             });
     }, []);
     

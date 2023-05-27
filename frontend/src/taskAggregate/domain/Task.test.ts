@@ -9,7 +9,7 @@ describe("Task", () => {
     
     it("Calling setName will assign a new name to task", () => {
         const result = task.SetName("new name");
-        expect(task.name).toBe("new name");
+        expect(task.title).toBe("new name");
         expect(result).toBeInstanceOf(Task);
     });
     it("Calling setDescription will assign a new description to a task", () => {

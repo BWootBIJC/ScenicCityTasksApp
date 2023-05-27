@@ -3,13 +3,13 @@
 public class TaskListViewModel
 {
     public int Id { get; set; }
-    public string Name { get; set; }
+    public string Title { get; set; }
     public string Description { get; set; }
 
-    public TaskListViewModel(int id, string name, string description)
+    public TaskListViewModel(int id, string title, string description)
     {
         Id = id;
-        Name = name;
+        Title = title;
         Description = description;
     }
 }

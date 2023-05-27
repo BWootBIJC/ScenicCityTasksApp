@@ -7,18 +7,24 @@ export class TaskItemsView {
     }
     
     public AddTask(task: Task): TaskItemsView {
-        this.tasks.push(task);
+        if(task.title === "") {
+            throw new Error("Please provide a name.");
+        }
+        
+        if (task.description === "") {
+            throw new Error("Please provide a description.");
+        }
+        
+        this.tasks.unshift(task);
         return new TaskItemsView(this.tasks);
     }
     
     public RemoveTask(task: Task): TaskItemsView {
         const findIndex = this.tasks.findIndex(x => {
-            return x.id === task.id &&
-                x.name === task.name &&
-                x.description === task.description
+            return x.id === task.id;
         });
         
-        if (!findIndex) {
+        if (findIndex === -1) {
             throw new Error(`Unable to find task with ID ${task.id}`);
         }
         

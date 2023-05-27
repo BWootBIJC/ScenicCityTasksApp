@@ -17,7 +17,7 @@ export const TaskComponent = ({task}: ITaskProps) => {
                 <div>
                     <TaskDescription
                         dataTestId="taskDescription"
-                        title={task.name}
+                        title={task.title}
                         description={task.description}
                     />
                 </div>

@@ -23,7 +23,7 @@ export const AddTask = ({ dataTestId }: IAddTaskProps) => {
                         <Input 
                             dataTestId="input"
                             placeholderText="Title" 
-                            value={task.name}
+                            value={task.title}
                             onChange={(e) => setTask(task => task.SetName(e.target.value))} 
                         />
                         <TextArea 
@@ -34,7 +34,15 @@ export const AddTask = ({ dataTestId }: IAddTaskProps) => {
                         />
                     </div>
                     <Button
-                        onClick={() => taskContext?.setTasks(tasks => tasks?.AddTask(task))}
+                        onClick={() => taskContext?.setTasks(tasks => {
+                            try {
+                                return tasks?.AddTask(task);
+                            } catch (e: any) {
+                                alert(e.message);
+                                console.log(e);
+                                return tasks;
+                            }
+                        })}
                         buttonText="Add Task"
                         dataTestId="button"
                     />

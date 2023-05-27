@@ -5,20 +5,20 @@ namespace backend.TasksAggregate;
 public class Task
 {
     public int Id { get; set; }
-    public string Name { get; set; }
+    public string Title { get; set; }
     public string Description { get; set; }
 
-    public Task(int id, string name, string description)
+    public Task(int id, string title, string description)
     {
         Id = id;
-        Name = name;
+        Title = title;
         Description = description;
     }
 
     public Task(TaskEditViewModel taskEditViewModel)
     {
         Id = taskEditViewModel.Id;
-        Name = taskEditViewModel.Name;
+        Title = taskEditViewModel.Title;
         Description = taskEditViewModel.Description;
     }
 }

@@ -17,7 +17,7 @@ describe.skip("Home", () => {
         taskListViewModel = [
             {
                 id: 1,
-                name: "name",
+                title: "name",
                 description: "description"
             }
         ]
