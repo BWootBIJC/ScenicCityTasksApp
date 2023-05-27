@@ -29,6 +29,59 @@ describe("API Gateway", () => {
 
         expect(result).toEqual({ response: 'data' });
         expect(fetchMock).toBeCalledTimes(1);
+        expect(fetchMock).toBeCalledWith(path, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        expect(apiResponseHandler.HandleResponse).toBeCalledTimes(1);
+    });
+    
+    it("On calling Post, makes Post request and calls response handler", async () => {
+        const response = {ok: true};
+
+        fetchMock.mockResolvedValue(response);
+
+        const path = '/api/test';
+        const requestBody = {
+            property1: "hello",
+            property2: "world"
+        };
+
+        await apiGateway.Post(path, requestBody);
+
+        expect(fetchMock).toBeCalledTimes(1);
+        expect(fetchMock).toBeCalledWith(path, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestBody)
+        });
+        expect(apiResponseHandler.HandleResponse).toBeCalledTimes(1);
+    });
+    it("On calling Delete, makes Delete request and calls response handler", async () => {
+        const response = {ok: true};
+
+        fetchMock.mockResolvedValue(response);
+
+        const path = '/api/test';
+        const requestBody = {
+            property1: "hello",
+            property2: "world"
+        };
+
+        await apiGateway.Delete(path, requestBody);
+
+        expect(fetchMock).toBeCalledTimes(1);
+        expect(fetchMock).toBeCalledWith(path, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestBody)
+        });
         expect(apiResponseHandler.HandleResponse).toBeCalledTimes(1);
     });
 });

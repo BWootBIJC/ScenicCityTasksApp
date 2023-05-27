@@ -22,7 +22,7 @@ describe("Task Repository", () => {
         ]
     });
     
-    it("Calling create tasks, it calls gateway", () => {
+    it("Calling GetAllTasks, it calls gateway", () => {
         //Arrange
         taskGateway.setup(x => x.GetAllTasks())
             .returns(Promise.resolve(taskListViewModel));
@@ -33,7 +33,7 @@ describe("Task Repository", () => {
         //Assert
         taskGateway.verify(x => x.GetAllTasks(), Times.Once());
     });
-    it('Calling CreateTasks, creates tasks from view model', async () => {
+    it('Calling GetAllTasks, returns tasks from view model', async () => {
         //Arrange
         taskGateway.setup(x => x.GetAllTasks())
             .returns(Promise.resolve(taskListViewModel));
@@ -46,4 +46,7 @@ describe("Task Repository", () => {
         expect(result.tasks).toBeInstanceOf(Array<Task>);
         expect(result).toBeInstanceOf(TaskItemsView);
     });
+    it("Calling AddTask calls right gateway method", () => {
+        taskGateway.setup(x => x.AddTask)
+    })
 });

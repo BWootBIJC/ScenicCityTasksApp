@@ -1,6 +1,7 @@
 ﻿import {IAPIGateway} from "../../apiGateway/IAPIGateway";
 import {ITaskGateway} from "./ITaskGateway";
 import {TaskListViewModel} from "../viewModels/TaskListViewModel";
+import {TaskCreateViewModel} from "../viewModels/TaskCreateViewModel";
 
 
 export class TaskGateway implements ITaskGateway {
@@ -14,4 +15,8 @@ export class TaskGateway implements ITaskGateway {
     public async GetAllTasks(): Promise<TaskListViewModel[]> {
         return await this._apiGateway.Get(`${this.basePath}/list`);
     };
+    
+    public async AddTask(taskCreateVm: TaskCreateViewModel): Promise<void> {
+        
+    }
 }

@@ -4,12 +4,14 @@ import {Button} from "../../ui/Button";
 import {useContext, useState} from "react";
 import { TaskContext } from "../state/TaskContext";
 import {Task} from "../domain/Task";
+import {ITaskRepository} from "../repository/ITaskRepository";
 
 interface IAddTaskProps {
     dataTestId: string;
+    taskRepo: ITaskRepository;
 }
 
-export const AddTask = ({ dataTestId }: IAddTaskProps) => {
+export const AddTask = ({ dataTestId, taskRepo }: IAddTaskProps) => {
     const taskContext = useContext(TaskContext);
     const [task, setTask] = useState<Task>(new Task(1, "", ""));
     
@@ -34,15 +36,18 @@ export const AddTask = ({ dataTestId }: IAddTaskProps) => {
                         />
                     </div>
                     <Button
-                        onClick={() => taskContext?.setTasks(tasks => {
-                            try {
-                                return tasks?.AddTask(task);
-                            } catch (e: any) {
-                                alert(e.message);
-                                console.log(e);
-                                return tasks;
-                            }
-                        })}
+                        onClick={() => {
+                            taskContext?.setTasks(tasks => {
+                                try {
+                                    tasks?.AddTask(task);
+                                } catch (e: any) {
+                                    alert(e.message);
+                                    console.log(e);
+                                    return tasks;
+                                }
+                            });
+                            
+                        }}
                         buttonText="Add Task"
                         dataTestId="button"
                     />
