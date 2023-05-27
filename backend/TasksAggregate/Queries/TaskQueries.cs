@@ -12,6 +12,8 @@ public class TaskQueries : ITaskQueries
     }
     public IEnumerable<TaskListViewModel> GetAllTasks()
     {
-        return _dbContext.Task.Select(x => new TaskListViewModel(x.Id, x.Name, x.Description ?? string.Empty));
+        return _dbContext.Task
+            .OrderBy(x => x.Id)
+            .Select(x => new TaskListViewModel(x.Id, x.Name, x.Description));
     }
 }
