@@ -1,8 +1,8 @@
 ﻿import {Input} from "../../ui/Input";
 import {TextArea} from "../../ui/TextArea";
 import {Button} from "../../ui/Button";
-import {useContext, useEffect, useState} from "react";
-import {TaskContext, TaskContextProvider} from "../state/TaskContext";
+import {useContext, useState} from "react";
+import { TaskContext } from "../state/TaskContext";
 import {Task} from "../domain/Task";
 
 interface IAddTaskProps {
