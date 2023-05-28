@@ -6,9 +6,8 @@ public class TaskEditViewModel
     public string Title { get; set; }
     public string Description { get; set; }
 
-    public TaskEditViewModel(int id, string title, string description)
+    public TaskEditViewModel(string title, string description)
     {
-        Id = id;
         Title = title;
         Description = description;
     }

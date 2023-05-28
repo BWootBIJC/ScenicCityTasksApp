@@ -15,6 +15,20 @@ export const AddTask = ({ dataTestId, taskRepo }: IAddTaskProps) => {
     const taskContext = useContext(TaskContext);
     const [task, setTask] = useState<Task>(new Task(1, "", ""));
     
+    const handleOnChange = () => {
+        taskContext?.setTasks((tasks) => {
+            try {
+                return tasks?.AddTask(task);
+            } catch (e: any) {
+                alert(e.message);
+                console.log(e);
+                return tasks;
+            }
+        });
+        return taskRepo.AddTask(task)
+            .catch(e => alert(e.message))
+    }
+    
     return (
         <>
             <div className="p-10 bg-slate-300 rounded-3xl shadow-2xl shadow-black mb-20">
@@ -36,18 +50,7 @@ export const AddTask = ({ dataTestId, taskRepo }: IAddTaskProps) => {
                         />
                     </div>
                     <Button
-                        onClick={() => {
-                            taskContext?.setTasks(tasks => {
-                                try {
-                                    tasks?.AddTask(task);
-                                } catch (e: any) {
-                                    alert(e.message);
-                                    console.log(e);
-                                    return tasks;
-                                }
-                            });
-                            
-                        }}
+                        onClick={handleOnChange}
                         buttonText="Add Task"
                         dataTestId="button"
                     />

@@ -3,12 +3,21 @@ import {TaskDescription} from "./TaskDescription";
 import {Button} from "../../ui/Button";
 import {useContext} from "react";
 import {TaskContext} from "../state/TaskContext";
+import {ITaskRepository} from "../repository/ITaskRepository";
+import {APIResponseHandler} from "../../apiGateway/APIResponseHandler";
+import {APIGateway} from "../../apiGateway/APIGateway";
+import {TaskGateway} from "../gateway/TaskGateway";
+import {TaskRepository} from "../repository/TaskRepository";
 
 interface ITaskProps {
     task: Task;
+    taskRepo: ITaskRepository;
 }
 
-export const TaskComponent = ({task}: ITaskProps) => {
+export const TaskComponent = ({task, taskRepo}: ITaskProps) => {
+    const apiHandler = new APIResponseHandler();
+    const apiGateway = new APIGateway(apiHandler);
+    const taskGateway = new TaskGateway(apiGateway);
     const taskContext = useContext(TaskContext);
 
     return (
@@ -23,7 +32,11 @@ export const TaskComponent = ({task}: ITaskProps) => {
                 </div>
                 <div>
                     <Button
-                        onClick={() => taskContext?.setTasks(taskState => taskState?.RemoveTask(task))}
+                        onClick={() => {
+                            taskContext?.setTasks(taskState => taskState?.RemoveTask(task));
+                            taskRepo.DeleteTask(task)
+                                .catch(e => alert(e.message))
+                        }}
                         buttonText="Remove Task"
                         dataTestId="removeButton"
                     />

@@ -2,8 +2,6 @@
 import {ITaskGateway} from "../gateway/ITaskGateway";
 import {Task} from "../domain/Task";
 import {TaskItemsView} from "../domain/TaskItemsView";
-import {TaskCreateViewModel} from "../viewModels/TaskCreateViewModel";
-import {TaskDeleteViewModel} from "../viewModels/TaskDeleteViewModel";
 import {TaskToViewModelMapper} from "../utils/TaskToViewModelMapper";
 
 export class TaskRepository implements ITaskRepository {
@@ -26,6 +24,6 @@ export class TaskRepository implements ITaskRepository {
     
     public async DeleteTask(task: Task) {
         const vm = TaskToViewModelMapper.MapTaskToTaskDeleteViewModel(task);
-        return await this.taskGateway.DeleteTask(vm);
+        return await this.taskGateway.DeleteTask(vm.id);
     }
 }
