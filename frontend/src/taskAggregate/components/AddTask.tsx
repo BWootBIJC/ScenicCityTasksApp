@@ -26,7 +26,7 @@ export const AddTask = ({ dataTestId, taskRepo }: IAddTaskProps) => {
                             dataTestId="input"
                             placeholderText="Title" 
                             value={task.title}
-                            onChange={(e) => setTask(task => task.SetName(e.target.value))} 
+                            onChange={(e) => setTask(task => task.SetTitle(e.target.value))} 
                         />
                         <TextArea 
                             placeholderText="Description..." 

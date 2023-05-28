@@ -3,14 +3,14 @@
     title: string;
     description: string;
     
-    constructor(id: number, name: string, description: string) {
+    constructor(id: number, title: string, description: string) {
         this.id = id;
-        this.title = name;
+        this.title = title;
         this.description = description;
     }
     
-    public SetName(name: string) {
-        this.title = name;
+    public SetTitle(title: string) {
+        this.title = title
         return new Task(this.id, this.title, this.description);
     }
     

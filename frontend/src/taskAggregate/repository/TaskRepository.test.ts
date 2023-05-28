@@ -1,14 +1,19 @@
 ﻿import {TaskRepository} from "./TaskRepository";
 import {ITaskGateway} from "../gateway/ITaskGateway";
-import {Mock, Times} from "moq.ts";
+import {It, Mock, Times} from "moq.ts";
 import {TaskListViewModel} from "../viewModels/TaskListViewModel";
 import {Task} from "../domain/Task";
 import {TaskItemsView} from "../domain/TaskItemsView";
+import {TaskCreateViewModel} from "../viewModels/TaskCreateViewModel";
+import {TaskToViewModelMapper} from "../utils/TaskToViewModelMapper";
+import {TaskDeleteViewModel} from "../viewModels/TaskDeleteViewModel";
 
 describe("Task Repository", () => {
     let taskRepository: TaskRepository;
     let taskGateway: Mock<ITaskGateway>;
     let taskListViewModel: TaskListViewModel[];
+    let task: Task;
+    let taskCreateViewModel: TaskCreateViewModel;
     
     beforeEach(() => {
         taskGateway = new Mock<ITaskGateway>();
@@ -19,7 +24,8 @@ describe("Task Repository", () => {
                 title: "name",
                 description: "description"
             }
-        ]
+        ];
+        task = new Task(2, "name 2", "description 2");
     });
     
     it("Calling GetAllTasks, it calls gateway", () => {
@@ -46,7 +52,23 @@ describe("Task Repository", () => {
         expect(result.tasks).toBeInstanceOf(Array<Task>);
         expect(result).toBeInstanceOf(TaskItemsView);
     });
-    it("Calling AddTask calls right gateway method", () => {
-        taskGateway.setup(x => x.AddTask)
+    it("Calling AddTask calls right gateway method", async() => {
+        //Arrange
+        taskGateway.setup(x => x.AddTask(It.IsAny<TaskCreateViewModel>()))
+            .returns(Promise.resolve());
+        
+        //Act
+        await taskRepository.AddTask(task);
+        
+        taskGateway.verify(x => x.AddTask(It.IsAny<TaskCreateViewModel>()), Times.Once());
+    });
+    it("Calling DeleteTask calls the right gateway method", async () => {
+        //Arrange
+        taskGateway.setup(x => x.DeleteTask(It.IsAny<TaskDeleteViewModel>()))
+            .returns(Promise.resolve());
+        
+        await taskRepository.DeleteTask(task);
+        
+        taskGateway.verify(x => x.DeleteTask(It.IsAny<TaskDeleteViewModel>()), Times.Once());
     })
 });

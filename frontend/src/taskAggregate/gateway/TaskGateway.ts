@@ -2,6 +2,7 @@
 import {ITaskGateway} from "./ITaskGateway";
 import {TaskListViewModel} from "../viewModels/TaskListViewModel";
 import {TaskCreateViewModel} from "../viewModels/TaskCreateViewModel";
+import {TaskDeleteViewModel} from "../viewModels/TaskDeleteViewModel";
 
 
 export class TaskGateway implements ITaskGateway {
@@ -17,6 +18,10 @@ export class TaskGateway implements ITaskGateway {
     };
     
     public async AddTask(taskCreateVm: TaskCreateViewModel): Promise<void> {
-        
+        return await this._apiGateway.Post(`${this.basePath}/`, taskCreateVm);
+    }
+    
+    public async DeleteTask(taskDeleteVm: TaskDeleteViewModel): Promise<void> {
+        return await this._apiGateway.Delete(`${this.basePath}/`, taskDeleteVm);
     }
 }
