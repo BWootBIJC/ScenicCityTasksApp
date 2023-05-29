@@ -34,7 +34,7 @@ export const TaskComponent = ({task, taskRepo}: ITaskProps) => {
                     <Button
                         onClick={() => {
                             taskContext?.setTasks(taskState => taskState?.RemoveTask(task));
-                            taskRepo.DeleteTask(task)
+                            taskRepo.DeleteTask(task.id)
                                 .catch(e => alert(e.message))
                         }}
                         buttonText="Remove Task"

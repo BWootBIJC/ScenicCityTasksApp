@@ -4,5 +4,5 @@ import {Task} from "../domain/Task";
 export interface ITaskRepository {
     GetAllTasks: () => Promise<TaskItemsView>;
     AddTask: (vm: Task) => Promise<number>;
-    DeleteTask: (vm: Task) => Promise<void>;
+    DeleteTask: (taskId: number) => Promise<void>;
 }

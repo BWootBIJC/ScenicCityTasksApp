@@ -65,7 +65,7 @@ describe("Task Repository", () => {
         taskGateway.setup(x => x.DeleteTask(It.IsAny<number>()))
             .returns(Promise.resolve());
         
-        await taskRepository.DeleteTask(task);
+        await taskRepository.DeleteTask(task.id);
         
         taskGateway.verify(x => x.DeleteTask(It.IsAny<number>()), Times.Once());
     })

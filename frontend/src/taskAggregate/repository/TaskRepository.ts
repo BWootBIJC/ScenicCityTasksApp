@@ -22,8 +22,7 @@ export class TaskRepository implements ITaskRepository {
         return await this.taskGateway.AddTask(vm);
     }
     
-    public async DeleteTask(task: Task) {
-        const vm = TaskToViewModelMapper.MapTaskToTaskDeleteViewModel(task);
-        return await this.taskGateway.DeleteTask(vm.id);
+    public async DeleteTask(taskId: number) {
+        return await this.taskGateway.DeleteTask(taskId);
     }
 }
