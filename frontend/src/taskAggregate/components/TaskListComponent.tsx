@@ -13,12 +13,16 @@ export const TaskListComponent = ({tasks}: ITaskListComponentProps) => {
     const apiHandler = new APIResponseHandler();
     const apiGateway = new APIGateway(apiHandler);
     const taskGateway = new TaskGateway(apiGateway);
-    
+
     return (
         <>
             <div data-testid="taskList">
                 {tasks.tasks.map(x => {
-                    return <TaskComponent key={x.id} task={x} taskRepo={new TaskRepository(taskGateway)}/>
+                    return <TaskComponent
+                        key={x.id}
+                        task={x}
+                        taskRepo={new TaskRepository(taskGateway)}
+                    />
                 })}
             </div>
         </>

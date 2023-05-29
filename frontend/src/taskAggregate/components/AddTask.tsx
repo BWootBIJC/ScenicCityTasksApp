@@ -13,21 +13,7 @@ interface IAddTaskProps {
 
 export const AddTask = ({ dataTestId, taskRepo }: IAddTaskProps) => {
     const taskContext = useContext(TaskContext);
-    const [task, setTask] = useState<Task>(new Task(1, "", ""));
-    
-    const handleOnChange = () => {
-        taskContext?.setTasks((tasks) => {
-            try {
-                return tasks?.AddTask(task);
-            } catch (e: any) {
-                alert(e.message);
-                console.log(e);
-                return tasks;
-            }
-        });
-        return taskRepo.AddTask(task)
-            .catch(e => alert(e.message))
-    }
+    const [task, setTask] = useState<Task>(new Task(0, "", ""));
     
     return (
         <>
@@ -50,7 +36,21 @@ export const AddTask = ({ dataTestId, taskRepo }: IAddTaskProps) => {
                         />
                     </div>
                     <Button
-                        onClick={handleOnChange}
+                        onClick={() => {
+                            taskRepo.AddTask(task)
+                                .then((id) => {
+                                    return taskContext?.setTasks((tasks) => {
+                                        try {
+                                            return tasks?.AddTask(id, task);
+                                        } catch (e: any) {
+                                            alert(e.message);
+                                            console.log(e);
+                                            return tasks;
+                                        }
+                                    });
+                                })
+                                .catch(e => alert(e.message))
+                        }}
                         buttonText="Add Task"
                         dataTestId="button"
                     />

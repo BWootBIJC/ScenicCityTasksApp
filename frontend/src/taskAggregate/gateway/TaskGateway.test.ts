@@ -4,14 +4,12 @@ import {TaskListViewModel} from "../viewModels/TaskListViewModel";
 import {IAPIGateway} from "../../apiGateway/IAPIGateway";
 import {TaskGateway} from "./TaskGateway";
 import {TaskCreateViewModel} from "../viewModels/TaskCreateViewModel";
-import {TaskDeleteViewModel} from "../viewModels/TaskDeleteViewModel";
 
 describe("TaskGateway", () => {
     let taskGateway: TaskGateway;
     let apiGateway: Mock<IAPIGateway>;
     let taskViewModel: TaskListViewModel[];
     let taskCreateViewModel: TaskCreateViewModel;
-    let taskDeleteViewModel: TaskDeleteViewModel;
     
     beforeEach(() => {
         apiGateway = new Mock<IAPIGateway>();
@@ -28,11 +26,6 @@ describe("TaskGateway", () => {
             title: "title",
             description: "description"
         };
-        taskDeleteViewModel = {
-            id: 1,
-            title: "title",
-            description: "description"
-        }
     });
     
     it("When calling GetAllTasks, it calls correct api gateway method", async () => {
@@ -49,7 +42,7 @@ describe("TaskGateway", () => {
     it("When calling AddTask, it calls correct api gateway method", async () => {
         //Arrange
         apiGateway.setup(x => x.Post(It.IsAny<string>(), It.IsAny<TaskCreateViewModel>()))
-            .returns(Promise.resolve());
+            .returns(Promise.resolve(1));
         
         //Act
         await taskGateway.AddTask(taskCreateViewModel);
@@ -58,12 +51,12 @@ describe("TaskGateway", () => {
     });
     it("When calling DeleteTask, it calls correct api gateway method", async () => {
         //Arrange
-        apiGateway.setup(x => x.Delete(It.IsAny<string>(), It.IsAny<TaskDeleteViewModel>()))
+        apiGateway.setup(x => x.Delete(It.IsAny<string>()))
             .returns(Promise.resolve());
 
         //Act
-        await taskGateway.DeleteTask(taskCreateViewModel);
+        await taskGateway.DeleteTask(1);
 
-        apiGateway.verify(x => x.Delete(It.IsAny<string>(), It.IsAny<TaskDeleteViewModel>()), Times.Once());
+        apiGateway.verify(x => x.Delete(It.IsAny<string>()), Times.Once());
     });
 });

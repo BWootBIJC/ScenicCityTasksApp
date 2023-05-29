@@ -5,8 +5,6 @@ import {TaskListViewModel} from "../viewModels/TaskListViewModel";
 import {Task} from "../domain/Task";
 import {TaskItemsView} from "../domain/TaskItemsView";
 import {TaskCreateViewModel} from "../viewModels/TaskCreateViewModel";
-import {TaskToViewModelMapper} from "../utils/TaskToViewModelMapper";
-import {TaskDeleteViewModel} from "../viewModels/TaskDeleteViewModel";
 
 describe("Task Repository", () => {
     let taskRepository: TaskRepository;
@@ -55,7 +53,7 @@ describe("Task Repository", () => {
     it("Calling AddTask calls right gateway method", async() => {
         //Arrange
         taskGateway.setup(x => x.AddTask(It.IsAny<TaskCreateViewModel>()))
-            .returns(Promise.resolve());
+            .returns(Promise.resolve(1));
         
         //Act
         await taskRepository.AddTask(task);
@@ -64,11 +62,11 @@ describe("Task Repository", () => {
     });
     it("Calling DeleteTask calls the right gateway method", async () => {
         //Arrange
-        taskGateway.setup(x => x.DeleteTask(It.IsAny<TaskDeleteViewModel>()))
+        taskGateway.setup(x => x.DeleteTask(It.IsAny<number>()))
             .returns(Promise.resolve());
         
         await taskRepository.DeleteTask(task);
         
-        taskGateway.verify(x => x.DeleteTask(It.IsAny<TaskDeleteViewModel>()), Times.Once());
+        taskGateway.verify(x => x.DeleteTask(It.IsAny<number>()), Times.Once());
     })
 });

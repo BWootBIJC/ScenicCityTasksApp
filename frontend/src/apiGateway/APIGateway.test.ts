@@ -72,7 +72,7 @@ describe("API Gateway", () => {
             property2: "world"
         };
 
-        await apiGateway.Delete(path, requestBody);
+        await apiGateway.Delete(path);
 
         expect(fetchMock).toBeCalledTimes(1);
         expect(fetchMock).toBeCalledWith(path, {
@@ -80,7 +80,6 @@ describe("API Gateway", () => {
             headers: {
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(requestBody)
         });
         expect(apiResponseHandler.HandleResponse).toBeCalledTimes(1);
     });

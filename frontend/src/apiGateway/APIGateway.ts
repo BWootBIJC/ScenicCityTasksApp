@@ -20,7 +20,7 @@ export class APIGateway implements IAPIGateway {
             .then(data => data as T);
     }
     
-    public async Post<T>(path: string, requestBody: T): Promise<void> {
+    public async Post<T>(path: string, requestBody: T): Promise<number> {
         const requestOptions = {
             method: "POST",
             headers: {
@@ -31,16 +31,15 @@ export class APIGateway implements IAPIGateway {
         
         return fetch(path, requestOptions)
             .then(response => this.apiResponseHandler.HandleResponse(response))
-            .then(data => data as void);
+            .then(data => data as number);
     }
     
-    public async Delete<T>(path: string, requestBody: T): Promise<void> {
+    public async Delete<T>(path: string): Promise<void> {
         const requestOptions = {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(requestBody),
         };
         
         return fetch(path, requestOptions)

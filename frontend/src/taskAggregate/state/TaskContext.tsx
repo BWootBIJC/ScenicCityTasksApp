@@ -20,6 +20,9 @@ interface ITaskContextProviderProps {
 export const TaskContextProvider = ({ children, taskRepo }: ITaskContextProviderProps) => {
     const [tasks, setTasks] = useState<TaskItemsView | undefined>();
 
+    useEffect(() => {
+        console.log(tasks, "TASKS")
+    }, [tasks])
 
     useEffect(() => {
         taskRepo.GetAllTasks()

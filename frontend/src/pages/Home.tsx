@@ -18,7 +18,7 @@ export const Home = () => {
     
     return (
         <>
-            <div className="max-w-7xl mx-auto mt-32">
+            <div className="max-w-7xl md:max-w-6xl mx-auto mt-32">
                 <AddTask dataTestId="addTask" taskRepo={new TaskRepository(taskGateway)}/>
                 <TaskListComponent tasks={taskContext?.tasks}/>
             </div>
