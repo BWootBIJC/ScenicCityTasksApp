@@ -33,34 +33,23 @@ describe("Home", () => {
             tasks,
             setTasks: jest.fn()
         }
-    });
 
-    it("renders to the dom when called", async () => {
         homePage = render(
             <TaskContext.Provider value={mockTaskContext}>
                 <Home/>
             </TaskContext.Provider>
         );
-        await waitFor(() => expect(homePage).not.toBeNull());
+    });
+
+    it("renders to the dom when called", () => {
+        expect(homePage).not.toBeNull();
     });
     it("renders TaskListComponent", async () => {
-        homePage = render(
-            <TaskContext.Provider value={mockTaskContext}>
-                <Home/>
-            </TaskContext.Provider>
-        );
-
         const taskListComponent = await screen.findByTestId("taskList");
-        await waitFor(() => expect(taskListComponent).toBeInTheDocument());
+        expect(taskListComponent).toBeInTheDocument();
     });
     it("renders AddTaskComponent", async () => {
-        homePage = render(
-            <TaskContext.Provider value={mockTaskContext}>
-                <Home/>
-            </TaskContext.Provider>
-        );
-
         const addTask = await screen.findByTestId("addTask");
-        await waitFor(() => expect(addTask).toBeInTheDocument());
+        expect(addTask).toBeInTheDocument();
     })
 });
