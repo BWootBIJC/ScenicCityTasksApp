@@ -51,5 +51,5 @@ describe("Home", () => {
     it("renders AddTaskComponent", async () => {
         const addTask = await screen.findByTestId("addTask");
         expect(addTask).toBeInTheDocument();
-    })
+    });
 });

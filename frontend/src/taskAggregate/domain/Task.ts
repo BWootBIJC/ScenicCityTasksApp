@@ -9,13 +9,15 @@
         this.description = description;
     }
     
+    public EmptyFields() {
+        return new Task(0, "", "");
+    }
+    
     public SetTitle(title: string) {
-        this.title = title
-        return new Task(this.id, this.title, this.description);
+        return new Task(this.id, title, this.description);
     }
     
     public SetDescription(description: string) {
-        this.description = description;
-        return new Task(this.id, this.title, this.description);
+        return new Task(this.id, this.title, description);
     }
 }
