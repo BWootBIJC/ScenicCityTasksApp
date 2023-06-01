@@ -7,7 +7,7 @@ appsettings.Development.json
 backend.sln.DotSettings.user
 
 backend/bin/
-backend\obj\Debug\net6.0
+backend/obj/Debug/net6.0
 
 *.pdb
 *.exe
