@@ -17,13 +17,12 @@ export class TaskRepository implements ITaskRepository {
         return new TaskItemsView(tasks);
     }
     
-    public async AddTask(task: Task) {
+    public async AddTask(task: Task): Promise<number> {
         const vm = TaskToViewModelMapper.MapTaskToTaskCreateViewModel(task);
         return await this.taskGateway.AddTask(vm);
     }
     
-    public async DeleteTask(task: Task) {
-        const vm = TaskToViewModelMapper.MapTaskToTaskDeleteViewModel(task);
-        return await this.taskGateway.DeleteTask(vm.id);
+    public async DeleteTask(taskId: number) {
+        return await this.taskGateway.DeleteTask(taskId);
     }
 }

@@ -6,7 +6,7 @@ export class TaskItemsView {
         this.tasks = taskList;
     }
     
-    public AddTask(task: Task): TaskItemsView {
+    public AddTask(taskId: number, task: Task): TaskItemsView {
         if(task.title === "") {
             throw new Error("Please provide a name.");
         }
@@ -14,6 +14,8 @@ export class TaskItemsView {
         if (task.description === "") {
             throw new Error("Please provide a description.");
         }
+        
+        task.id = taskId;
         
         this.tasks.unshift(task);
         return new TaskItemsView(this.tasks);

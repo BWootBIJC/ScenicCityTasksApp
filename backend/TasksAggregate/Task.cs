@@ -8,16 +8,14 @@ public class Task
     public string Title { get; set; }
     public string Description { get; set; }
 
-    public Task(int id, string title, string description)
+    public Task(string title, string description)
     {
-        Id = id;
         Title = title;
         Description = description;
     }
 
     public Task(TaskEditViewModel taskEditViewModel)
     {
-        Id = taskEditViewModel.Id;
         Title = taskEditViewModel.Title;
         Description = taskEditViewModel.Description;
     }

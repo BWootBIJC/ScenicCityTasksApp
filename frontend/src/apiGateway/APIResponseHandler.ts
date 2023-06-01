@@ -6,7 +6,9 @@ export class APIResponseHandler implements IAPIResponseHandler {
             return await response.json()
                 .then((x: any) => Promise.reject(x));
         }
-        const result = await response.json();
-        return result;
+        if(response.status === 204) {
+            return Promise.resolve(null);
+        }
+        return await response.json();
     }
 }

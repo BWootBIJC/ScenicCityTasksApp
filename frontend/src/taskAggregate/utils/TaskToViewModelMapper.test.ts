@@ -16,10 +16,4 @@ describe("TaskToViewModelMapper", () => {
        expect(result.title).toBe("task");
        expect(result.description).toBe("description");
    });
-   it("Calling MapTaskToTaskDeleteViewModel maps correctly", () => {
-       const result = TaskToViewModelMapper.MapTaskToTaskDeleteViewModel(task);
-       expect(result.id).toBe(1);
-       expect(result.title).toBe("task");
-       expect(result.description).toBe("description");
-   })
 });

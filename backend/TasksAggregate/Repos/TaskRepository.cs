@@ -18,7 +18,7 @@ public class TaskRepository : ITaskRepository
 
     public void Remove(int id)
     {
-        var taskToDelete = _dbContext.Task.Find(id);
+        var taskToDelete = _dbContext.Task.FirstOrDefault(x => x.Id == id);
         if (taskToDelete != null)
         {
             _dbContext.Task.Remove(taskToDelete);

@@ -15,7 +15,7 @@ describe("TaskItems", () => {
     
     it("On Calling add tasks, it adds a new task to the task items list", () => {
         //Act
-        const result = taskItems.AddTask(new Task(4, "title 4", "description 4"));
+        const result = taskItems.AddTask(4, new Task(1, "title 4", "description 4"));
         
         //Assert
         expect(result.tasks).toHaveLength(4);
@@ -24,12 +24,12 @@ describe("TaskItems", () => {
     
     it("If name has empty value, it throws an error", () => {
         //Act & Assert
-        expect(() => taskItems.AddTask(new Task(4, "", "")))
+        expect(() => taskItems.AddTask(4, new Task(1, "", "")))
             .toThrowError("Please provide a name.");
     });
     
     it("If task has no description, it throws an error", () => {
-       expect(() => taskItems.AddTask(new Task(4, "name", "")))
+       expect(() => taskItems.AddTask(4, new Task(1, "name", "")))
            .toThrowError("Please provide a description."); 
     });
     
