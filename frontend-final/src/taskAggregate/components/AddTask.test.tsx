@@ -1,14 +1,21 @@
-﻿import {render, screen, RenderResult} from "@testing-library/react";
+﻿import {render, screen, RenderResult, waitFor} from "@testing-library/react";
 import {AddTask} from "./AddTask";
 import {ITaskRepository} from "../repository/ITaskRepository";
-import {Mock} from "moq.ts";
+import {It, Mock, Times} from "moq.ts";
+import React, {} from "react";
+import {Task} from "../domain/Task";
+import userEvent from "@testing-library/user-event/";
+import {TaskItemsView} from "../domain/TaskItemsView";
+import {ITaskContext} from "../state/TaskContext";
 
 describe("Add Task Component", () => {
     let addTask: RenderResult;
     let taskRepo: Mock<ITaskRepository>;
+    let task: Mock<TaskItemsView>;
     
     beforeEach(() => {
         taskRepo = new Mock<ITaskRepository>();
+        task = new Mock<TaskItemsView>();
         addTask = render(
             <AddTask
                 taskRepo={taskRepo.object()}
@@ -35,5 +42,13 @@ describe("Add Task Component", () => {
     it("Renders add task button", () => {
         const button = screen.getByTestId("button");
         expect(button).toBeInTheDocument();
+    });
+    it('calls repository AddTask method', async() => {
+        taskRepo.setup(x => x.AddTask(It.IsAny<Task>())).returns(Promise.resolve(1));
+        const button = screen.getByTestId("button");
+
+        await userEvent.click(button);
+
+        await waitFor(() => taskRepo.verify(x => x.AddTask(It.IsAny<Task>()), Times.Once()));
     });
 });
