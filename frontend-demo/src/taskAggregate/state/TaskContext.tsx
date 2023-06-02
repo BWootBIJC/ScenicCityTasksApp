@@ -2,7 +2,7 @@
 import {TaskItemsView} from "../domain/TaskItemsView";
 import {ITaskRepository} from "../repository/ITaskRepository";
 
-interface ITaskContext {
+export interface ITaskContext {
     tasks: TaskItemsView | undefined;
     setTasks: Dispatch<SetStateAction<TaskItemsView | undefined>>;
 }
@@ -30,7 +30,7 @@ export const TaskContextProvider = ({ children, taskRepo }: ITaskContextProvider
                 alert(e.message);
             });
     }, []);
-    
+
     return (
         <TaskContext.Provider value={{tasks, setTasks}}>
             {children}
