@@ -1,0 +1,37 @@
+@import 'tailwindcss/base.css';
+@import 'tailwindcss/components.css';
+@import 'tailwindcss/utilities.css';
+
+@layer base {
+    html, body {
+        @apply bg-zinc-700;
+    }
+    h1 {
+        @apply font-bold text-3xl text-white;
+    }
+    p {
+        @apply text-slate-300;
+    }
+}
+
+@layer components {
+    .button {
+        @apply bg-gray-900 py-3 px-8 text-white rounded-lg hover:bg-gray-400 duration-300 hover:shadow-lg hover:text-zinc-950;
+    }
+    
+    .input {
+        @apply p-2 h-auto w-full rounded-lg focus-visible:outline-none;
+    }
+    
+    .text-area {
+        @apply px-2 pt-2 pb-32 h-auto w-full rounded-lg focus-visible:outline-none;
+    }
+    
+    .add-task-background {
+        @apply p-10 bg-slate-300 rounded-3xl shadow-2xl shadow-black mb-20;
+    }
+    
+    .add-task-title {
+        @apply mb-7 text-zinc-950;
+    }
+}
