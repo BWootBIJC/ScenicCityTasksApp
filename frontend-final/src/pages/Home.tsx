@@ -7,20 +7,13 @@ import {APIResponseHandler} from "../apiGateway/APIResponseHandler";
 import {APIGateway} from "../apiGateway/APIGateway";
 import {TaskGateway} from "../taskAggregate/gateway/TaskGateway";
 export const Home = () => {
-    const taskContext = useContext(TaskContext);
-    const apiHandler = new APIResponseHandler();
-    const apiGateway = new APIGateway(apiHandler);
-    const taskGateway = new TaskGateway(apiGateway);
-
-    if(!taskContext?.tasks) {
-        return <></>
-    }
+    const { tasks } = useContext(TaskContext);
     
     return (
         <>
             <div className="max-w-7xl md:max-w-6xl mx-auto mt-32">
-                <AddTask dataTestId="addTask" taskRepo={new TaskRepository(taskGateway)}/>
-                <TaskListComponent tasks={taskContext?.tasks}/>
+                <AddTask dataTestId="addTask"/>
+                <TaskListComponent tasks={tasks!}/>
             </div>
         </>
     )

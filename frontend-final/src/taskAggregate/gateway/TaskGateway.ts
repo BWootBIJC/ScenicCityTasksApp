@@ -12,15 +12,15 @@ export class TaskGateway implements ITaskGateway {
         this._apiGateway = apiGateway;
     };
     
-    public async GetAllTasks(): Promise<TaskListViewModel[]> {
+    public async getAllTasks(): Promise<TaskListViewModel[]> {
         return await this._apiGateway.Get(`${this.basePath}/list`);
     };
     
-    public async AddTask(taskCreateVm: TaskCreateViewModel): Promise<number> {
+    public async addTask(taskCreateVm: TaskCreateViewModel): Promise<number> {
         return await this._apiGateway.Post(`${this.basePath}/`, taskCreateVm);
     }
     
-    public async DeleteTask(taskId: number): Promise<void> {
+    public async deleteTask(taskId: number): Promise<void> {
         return await this._apiGateway.Delete(`${this.basePath}/${taskId}`);
     }
 }

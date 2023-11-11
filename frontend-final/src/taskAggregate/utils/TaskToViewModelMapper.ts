@@ -1,12 +1,12 @@
-﻿import {Task} from "../domain/Task";
+﻿import {TaskCard} from "../domain/TaskCard";
 import {TaskCreateViewModel} from "../viewModels/TaskCreateViewModel";
 
 export class TaskToViewModelMapper {
-    public static MapTaskToTaskCreateViewModel(task: Task): TaskCreateViewModel {
+    public static MapTaskToTaskCreateViewModel(task: TaskCard): TaskCreateViewModel {
         return {
             id: task.id,
-            title: task.title,
-            description: task.description
+            title: task._title,
+            description: task._description
         } as TaskCreateViewModel;
     };
 }

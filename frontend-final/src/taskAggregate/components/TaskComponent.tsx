@@ -1,4 +1,4 @@
-﻿import {Task} from "../domain/Task";
+﻿import {TaskCard} from "../domain/TaskCard";
 import {TaskDescription} from "./TaskDescription";
 import {Button} from "../../ui/Button";
 import {useContext} from "react";
@@ -8,17 +8,23 @@ import {APIResponseHandler} from "../../apiGateway/APIResponseHandler";
 import {APIGateway} from "../../apiGateway/APIGateway";
 import {TaskGateway} from "../gateway/TaskGateway";
 import {TaskRepository} from "../repository/TaskRepository";
+import {ServiceCollectionContext} from "../../serviceProvider/ServiceCollectionProvider";
 
 interface ITaskProps {
-    task: Task;
-    taskRepo: ITaskRepository;
+    task: TaskCard;
 }
 
-export const TaskComponent = ({task, taskRepo}: ITaskProps) => {
-    const apiHandler = new APIResponseHandler();
-    const apiGateway = new APIGateway(apiHandler);
-    const taskGateway = new TaskGateway(apiGateway);
-    const taskContext = useContext(TaskContext);
+export const TaskComponent = ({task}: ITaskProps) => {
+    const { TaskService } = useContext(ServiceCollectionContext);
+    const { setTasks } = useContext(TaskContext);
+    
+    function onRemoveTask() {
+        TaskService.deleteTask(task.id)
+            .then(data => {
+                setTasks(data);
+            });
+    }
+    
 
     return (
         <>
@@ -32,11 +38,7 @@ export const TaskComponent = ({task, taskRepo}: ITaskProps) => {
                 </div>
                 <div>
                     <Button
-                        onClick={() => {
-                            taskContext?.setTasks(taskState => taskState?.RemoveTask(task));
-                            taskRepo.DeleteTask(task.id)
-                                .catch(e => alert(e.message))
-                        }}
+                        onClick={onRemoveTask}
                         buttonText="Remove Task"
                         dataTestId="removeButton"
                     />

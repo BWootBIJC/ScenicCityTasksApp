@@ -1,6 +1,6 @@
 ﻿import {ITaskRepository} from "./ITaskRepository";
 import {ITaskGateway} from "../gateway/ITaskGateway";
-import {Task} from "../domain/Task";
+import {TaskCard} from "../domain/TaskCard";
 import {TaskItemsView} from "../domain/TaskItemsView";
 import {TaskToViewModelMapper} from "../utils/TaskToViewModelMapper";
 
@@ -11,18 +11,18 @@ export class TaskRepository implements ITaskRepository {
         this.taskGateway = taskGateway;        
     }
 
-    public async GetAllTasks() {
-        const result = await this.taskGateway.GetAllTasks();
-        const tasks: Task[] = result.map(x => new Task(x.id, x.title, x.description));
+    public async getAllTasks() {
+        const result = await this.taskGateway.getAllTasks();
+        const tasks: TaskCard[] = result.map(x => new TaskCard(x.id, x.title, x.description));
         return new TaskItemsView(tasks);
     }
     
-    public async AddTask(task: Task): Promise<number> {
+    public async addTask(task: TaskCard): Promise<number> {
         const vm = TaskToViewModelMapper.MapTaskToTaskCreateViewModel(task);
-        return await this.taskGateway.AddTask(vm);
+        return await this.taskGateway.addTask(vm);
     }
     
-    public async DeleteTask(taskId: number) {
-        return await this.taskGateway.DeleteTask(taskId);
+    public async deleteTask(taskId: number) {
+        return await this.taskGateway.deleteTask(taskId);
     }
 }

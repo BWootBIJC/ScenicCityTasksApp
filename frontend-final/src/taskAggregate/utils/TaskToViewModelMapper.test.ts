@@ -1,13 +1,13 @@
 ﻿import {TaskCreateViewModel} from "../viewModels/TaskCreateViewModel";
-import {Task} from "../domain/Task";
+import {TaskCard} from "../domain/TaskCard";
 import {TaskToViewModelMapper} from "./TaskToViewModelMapper";
 
 describe("TaskToViewModelMapper", () => {
-   let task: Task;
+   let task: TaskCard;
    let taskCreateViewModel: TaskCreateViewModel;
    
    beforeEach(() => {
-       task = new Task(1, "task", "description");
+       task = new TaskCard(1, "task", "description");
    });
    
    it("Calling MapTaskToTaskCreateViewModel maps correctly", () => {

@@ -2,18 +2,27 @@
 import {TextArea} from "../../ui/TextArea";
 import {Button} from "../../ui/Button";
 import {useContext, useState} from "react";
-import {TaskContext} from "../state/TaskContext";
-import {Task} from "../domain/Task";
-import {ITaskRepository} from "../repository/ITaskRepository";
+import {ITaskContext, TaskContext} from "../state/TaskContext";
+import {TaskCard} from "../domain/TaskCard";
+import {ServiceCollectionContext} from "../../serviceProvider/ServiceCollectionProvider";
 
 interface IAddTaskProps {
     dataTestId: string;
-    taskRepo: ITaskRepository;
 }
 
-export const AddTask = ({dataTestId, taskRepo}: IAddTaskProps) => {
-    const taskContext = useContext(TaskContext);
-    const [task, setTask] = useState<Task>(new Task(0, "", ""));
+export const AddTask = ({dataTestId}: IAddTaskProps) => {
+    const [task, setTask] = useState<TaskCard>(new TaskCard(0, "", ""));
+    const { TaskService } = useContext(ServiceCollectionContext);
+    const { setTasks } = useContext<ITaskContext>(TaskContext);
+    
+    function onAddTask() {
+        TaskService.addTask(task)
+            .then((taskItemsView) => {
+                setTasks(taskItemsView);
+            })
+            .then(() => setTask(task => task.emptyFields()))
+            .catch(e => alert(e.message));
+    }
 
     return (
         <>
@@ -26,32 +35,17 @@ export const AddTask = ({dataTestId, taskRepo}: IAddTaskProps) => {
                             dataTestId="input"
                             placeholderText="Title"
                             value={task.title}
-                            onChange={(e) => setTask(task => task.SetTitle(e.target.value))}
+                            onChange={(e) => setTask(task => task.setTitle(e.target.value))}
                         />
                         <TextArea
                             placeholderText="Description..."
                             dataTestId="textArea"
                             value={task.description}
-                            onChange={(e) => setTask(task => task.SetDescription(e.target.value))}
+                            onChange={(e) => setTask(task => task.setDescription(e.target.value))}
                         />
                     </div>
                     <Button
-                        onClick={() => {
-                            taskRepo.AddTask(task)
-                                .then((id) => {
-                                    return taskContext?.setTasks((tasks) => {
-                                        try {
-                                            return tasks?.AddTask(id, task);
-                                        } catch (e: any) {
-                                            alert(e.message);
-                                            console.log(e);
-                                            return tasks;
-                                        }
-                                    });
-                                })
-                                .catch(e => alert(e.message))
-                            setTask(task => task.EmptyFields());
-                        }}
+                        onClick={onAddTask}
                         buttonText="Add Task"
                         dataTestId="button"
                     />

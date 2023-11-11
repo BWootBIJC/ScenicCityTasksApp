@@ -2,7 +2,7 @@
 import {ITaskGateway} from "../gateway/ITaskGateway";
 import {It, Mock, Times} from "moq.ts";
 import {TaskListViewModel} from "../viewModels/TaskListViewModel";
-import {Task} from "../domain/Task";
+import {TaskCard} from "../domain/TaskCard";
 import {TaskItemsView} from "../domain/TaskItemsView";
 import {TaskCreateViewModel} from "../viewModels/TaskCreateViewModel";
 
@@ -10,7 +10,7 @@ describe("Task Repository", () => {
     let taskRepository: TaskRepository;
     let taskGateway: Mock<ITaskGateway>;
     let taskListViewModel: TaskListViewModel[];
-    let task: Task;
+    let task: TaskCard;
     
     beforeEach(() => {
         taskGateway = new Mock<ITaskGateway>();
@@ -22,50 +22,50 @@ describe("Task Repository", () => {
                 description: "description"
             }
         ];
-        task = new Task(2, "name 2", "description 2");
+        task = new TaskCard(2, "name 2", "description 2");
     });
     
     it("Calling GetAllTasks, it calls gateway", () => {
         //Arrange
-        taskGateway.setup(x => x.GetAllTasks())
+        taskGateway.setup(x => x.getAllTasks())
             .returns(Promise.resolve(taskListViewModel));
         
         //Act
-        taskRepository.GetAllTasks();
+        taskRepository.getAllTasks();
         
         //Assert
-        taskGateway.verify(x => x.GetAllTasks(), Times.Once());
+        taskGateway.verify(x => x.getAllTasks(), Times.Once());
     });
     it('Calling GetAllTasks, returns tasks from view model', async () => {
         //Arrange
-        taskGateway.setup(x => x.GetAllTasks())
+        taskGateway.setup(x => x.getAllTasks())
             .returns(Promise.resolve(taskListViewModel));
         
         //Act
-        const result = await taskRepository.GetAllTasks();
+        const result = await taskRepository.getAllTasks();
         
         //Assert
         expect(result.tasks).toHaveLength(1);
-        expect(result.tasks).toBeInstanceOf(Array<Task>);
+        expect(result.tasks).toBeInstanceOf(Array<TaskCard>);
         expect(result).toBeInstanceOf(TaskItemsView);
     });
     it("Calling AddTask calls right gateway method", async() => {
         //Arrange
-        taskGateway.setup(x => x.AddTask(It.IsAny<TaskCreateViewModel>()))
+        taskGateway.setup(x => x.addTask(It.IsAny<TaskCreateViewModel>()))
             .returns(Promise.resolve(1));
         
         //Act
-        await taskRepository.AddTask(task);
+        await taskRepository.addTask(task);
         
-        taskGateway.verify(x => x.AddTask(It.IsAny<TaskCreateViewModel>()), Times.Once());
+        taskGateway.verify(x => x.addTask(It.IsAny<TaskCreateViewModel>()), Times.Once());
     });
     it("Calling DeleteTask calls the right gateway method", async () => {
         //Arrange
-        taskGateway.setup(x => x.DeleteTask(It.IsAny<number>()))
+        taskGateway.setup(x => x.deleteTask(It.IsAny<number>()))
             .returns(Promise.resolve());
         
-        await taskRepository.DeleteTask(task.id);
+        await taskRepository.deleteTask(task.id);
         
-        taskGateway.verify(x => x.DeleteTask(It.IsAny<number>()), Times.Once());
+        taskGateway.verify(x => x.deleteTask(It.IsAny<number>()), Times.Once());
     })
 });

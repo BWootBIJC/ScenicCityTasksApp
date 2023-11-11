@@ -34,7 +34,7 @@ describe("TaskGateway", () => {
             .returns(Promise.resolve(taskViewModel));
         
         //Act
-        await taskGateway.GetAllTasks();
+        await taskGateway.getAllTasks();
         
         //Assert
         apiGateway.verify(x => x.Get(It.IsAny<string>()), Times.Once());
@@ -45,7 +45,7 @@ describe("TaskGateway", () => {
             .returns(Promise.resolve(1));
         
         //Act
-        await taskGateway.AddTask(taskCreateViewModel);
+        await taskGateway.addTask(taskCreateViewModel);
         
         apiGateway.verify(x => x.Post(It.IsAny<string>(), It.IsAny<TaskCreateViewModel>()), Times.Once());
     });
@@ -55,7 +55,7 @@ describe("TaskGateway", () => {
             .returns(Promise.resolve());
 
         //Act
-        await taskGateway.DeleteTask(1);
+        await taskGateway.deleteTask(1);
 
         apiGateway.verify(x => x.Delete(It.IsAny<string>()), Times.Once());
     });
